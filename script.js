@@ -1,96 +1,55 @@
-const perguntas = [
-[
-    ["Qual a capital do Brasil?",["SP","Brasília","RJ","Curitiba"],1],
-    ["Qual a capital da Argentina?",["Buenos Aires","Córdoba","Rosário","Mendoza"],0]
-],
-[
-    ["5 x 5 = ?",["20","15","25","30"],2],
-    ["10 x 2 = ?",["15","20","25","30"],1]
-],
-[
-    ["Planeta vermelho?",["Marte","Terra","Júpiter","Saturno"],0],
-    ["Maior planeta?",["Marte","Vênus","Júpiter","Mercúrio"],2]
-],
-[
-    ["Quem descobriu o Brasil?",["Cabral","Tiradentes","Getúlio","Dom Pedro"],0],
-    ["Primeiro imperador do Brasil?",["Pedro II","Cabral","Dom Pedro I","Getúlio"],2]
-],
-[
-    ["Símbolo da água?",["CO2","H2O","NaCl","O2"],1],
-    ["Símbolo do ouro?",["Au","Ag","Fe","Cu"],0]
-]
+let p = [
+["Capital do Brasil?",["SP","Brasília","RJ","BH"],1],
+["5 x 5?",["20","25","15","30"],1],
+["Planeta vermelho?",["Marte","Terra","Júpiter","Saturno"],0],
+["Quem descobriu o Brasil?",["Cabral","Dom Pedro","Getúlio","Tiradentes"],0],
+["H2O é?",["Sal","Água","Ferro","Ouro"],1]
 ];
 
-let quiz = perguntas.map(p =>
-    p[Math.floor(Math.random()*2)]
-);
-
-let atual = 0;
-let acertos = 0;
+let n=0,a=0;
 
 mostrar();
 
 function mostrar(){
+    pergunta.innerHTML=p[n][0];
 
-    pergunta.innerHTML = quiz[atual][0];
+    alternativas.innerHTML="";
 
-    alternativas.innerHTML = quiz[atual][1]
-        .map((alt,i)=>
-        `<button onclick="responder(${i})">${alt}</button>`)
-        .join("");
+    p[n][1].forEach((x,i)=>
+        alternativas.innerHTML+=
+        `<button onclick="resp(${i})">${x}</button>`
+    );
 }
 
-function responder(i){
+function resp(i){
 
-    if(i === quiz[atual][2]) acertos++;
+    if(i==p[n][2]) a++;
 
-    atual++;
+    n++;
 
-    if(atual < 5){
-        mostrar();
-    }else{
-        resultado();
-    }
-}
+    if(n<5) return mostrar();
 
-function resultado(){
+    document.body.style.textAlign="center";
 
-    document.body.innerHTML = "";
+    if(a<=2)
+        document.body.innerHTML=
+        `<div style="background:red;height:100vh;color:white">
+        <h1>Você errou ${(5-a)*20}%!</h1>
+        <h2>Tente novamente</h2>
+        </div>`;
 
-    let tela = document.createElement("div");
+    else if(a<5)
+        document.body.innerHTML=
+        `<div style="background:gold;height:100vh">
+        <h1>Parabéns!</h1>
+        <h2>Você quase gabaritou!</h2>
+        <h3>${a}/5</h3>
+        </div>`;
 
-    tela.style.textAlign = "center";
-    tela.style.paddingTop = "100px";
-
-    if(acertos <= 2){
-
-        tela.style.background = "red";
-        tela.style.color = "white";
-
-        tela.innerHTML =
-        `<h1>Você errou ${(5-acertos)*20}%!</h1>
-        <h2>Tente novamente.</h2>`;
-
-    }else if(acertos <= 4){
-
-        tela.style.background = "gold";
-
-        tela.innerHTML =
-        `<h1>Parabéns!</h1>
-        <h2>Você mandou bem.</h2>
-        <p>${acertos}/5</p>`;
-
-    }else{
-
-        tela.style.background = "limegreen";
-        tela.style.color = "white";
-
-        tela.innerHTML =
-        `<h1>VOCÊ ACERTOU TUDO!</h1>
-        <h2>Parabéns 🎉</h2>`;
-    }
-
-    tela.style.height = "100vh";
-
-    document.body.appendChild(tela);
+    else
+        document.body.innerHTML=
+        `<div style="background:lime;height:100vh">
+        <h1>Você acertou tudo!</h1>
+        <h2>Parabéns 🎉</h2>
+        </div>`;
 }
