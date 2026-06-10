@@ -1,9 +1,14 @@
 let p = [
-["Capital do Brasil?",["SP","Brasília","RJ","BH"],1],
-["5 x 5?",["20","25","15","30"],1],
-["Planeta vermelho?",["Marte","Terra","Júpiter","Saturno"],0],
-["Quem descobriu o Brasil?",["Cabral","Dom Pedro","Getúlio","Tiradentes"],0],
-["H2O é?",["Sal","Água","Ferro","Ouro"],1]
+[["Qual a capital do Brasil?",["SP","Brasília","RJ","Curitiba"],1],
+    ["Qual a capital da Argentina?",["Buenos Aires","Córdoba","Rosário","Mendoza"],0]],
+[["5 x 5 = ?",["20","15","25","30"],2],
+    ["10 x 2 = ?",["15","20","25","30"],1]],
+[ ["Planeta vermelho?",["Marte","Terra","Júpiter","Saturno"],0],
+    ["Maior planeta?",["Marte","Vênus","Júpiter","Mercúrio"],2]],
+[ ["Quem descobriu o Brasil?",["Cabral","Tiradentes","Getúlio","Dom Pedro"],0],
+    ["Primeiro imperador do Brasil?",["Pedro II","Cabral","Dom Pedro I","Getúlio"],2]],
+    [ ["Símbolo da água?",["CO2","H2O","NaCl","O2"],1],
+    ["Símbolo do ouro?",["Au","Ag","Fe","Cu"],0]]
 ];
 
 let n=0,a=0;
